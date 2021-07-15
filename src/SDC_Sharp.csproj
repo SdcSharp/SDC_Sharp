@@ -1,0 +1,37 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netcoreapp3.1</TargetFramework>
+        <PackageId>SDC_Sharp</PackageId>
+        <Title>SDC_Sharp</Title>
+        <Authors>Satan1c</Authors>
+        <Description>https://sdc.su API wrapper for C# .NET Core 3.1</Description>
+        <Copyright>Copyright (c) Alexander 2021</Copyright>
+        <PackageProjectUrl>https://github.com/SdcSharp/SDC_Sharp</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/SdcSharp/SDC_Sharp</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
+        <PackageTags>SDC</PackageTags>
+        <AssemblyName>SDC_Sharp</AssemblyName>
+        <PackageVersion>2.0.0</PackageVersion>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Remove="SDC_Sharp.DSharpPlus\**" />
+      <Compile Remove="SDC_Sharp.DiscordNet\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Remove="SDC_Sharp.DSharpPlus\**" />
+      <EmbeddedResource Remove="SDC_Sharp.DiscordNet\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="SDC_Sharp.DSharpPlus\**" />
+      <None Remove="SDC_Sharp.DiscordNet\**" />
+    </ItemGroup>
+
+</Project>
