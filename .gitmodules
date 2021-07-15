@@ -1,0 +1,6 @@
+[submodule "DiscordNet"]
+	path = src\SDC_Sharp.DiscordNet
+	url = https://github.com/SdcSharp/SDC_Sharp.DiscordNet.git
+[submodule "DSharpPlus"]
+	path = src\SDC_Sharp.DSharpPlus
+	url = https://github.com/SdcSharp/SDC_Sharp.DSharpPlus.git
