@@ -1,7 +1,7 @@
 # SDC_Sharp
 * C# враппер для [SDC API](https://docs.server-discord.com)
 * API документация: https://docs.server-discord.com/
-* [Сервер поддержки](https://discord.gg/8epHXKA) враппера 
+* [Сервер поддержки](https://discord.gg/NSkg6N9) враппера 
 
 ## Установка
 
