@@ -5,10 +5,10 @@
 
 ## Установка
 
-Основной пакет: https://www.nuget.org/packages/SDC_Sharp/
+* Основной пакет: https://www.nuget.org/packages/SDC_Sharp/
 
-Discord.NET расширение: https://www.nuget.org/packages/SDC_Sharp.DiscordNet/
-DSharpPlus расширение: https://www.nuget.org/packages/SDC_Sharp.DSharpPlus/
+* Discord.NET расширение: https://www.nuget.org/packages/SDC_Sharp.DiscordNet/
+* DSharpPlus расширение: https://www.nuget.org/packages/SDC_Sharp.DSharpPlus/
 
 # Внимание!
 ## Враппер полностью асинхронен. Любые вызовы функций следует проводить только в асинхронных функциях
