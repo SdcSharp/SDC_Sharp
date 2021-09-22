@@ -30,7 +30,7 @@ namespace BotNamespace
             await using var services = new ServiceCollection()
                 .AddSdcClient(new SdcClientConfig
                     {
-                        // Сюда надо вписать токен бота
+                        // Сюда надо вписать токен бота с сайта
                         Token = @"eyJhbGciOiJIUzI1NiIsInR...",
 
                         // Здесь надо передать объект враппера, в данном примере для бота с шардами
