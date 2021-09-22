@@ -78,7 +78,7 @@ public class YourCommandsModule : ModuleBase<ShardedCommandContext>
     [Command("monitoring")]
     public async Task Monitoring(ulong? id = null)
     {
-        var guild = await _sdcSharpClient.GetMonitoring()
+        var guild = await _sdcSharpClient.GetMonitoring().GetGuild(id ?? Context.Guild.Id)
 
         await ReplyAsync(embed: guild.ToEmbed().Build());
     }
@@ -151,7 +151,7 @@ public class YourCommandsModule : ModuleBase<ShardedCommandContext>
     {
         var bots = _sdcSharpClient.GetBots();
 
-        await bots.AutoUpdateStats(null, null, null, TimeSpan.FromHours(4));
+        await bots.AutoUpdateStats(TimeSpan.FromHours(4));
     }
 }
 ```
