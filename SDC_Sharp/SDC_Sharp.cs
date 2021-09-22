@@ -4,8 +4,9 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using SDC_Sharp.SDC_Sharp.Types;
 
-namespace SDC_Sharp
+namespace SDC_Sharp.SDC_Sharp
 {
     public class SdcSharpClient
     {
@@ -18,12 +19,12 @@ namespace SDC_Sharp
         internal readonly TimeSpan RateLimit = TimeSpan.FromSeconds(3);
         internal DateTime LastRequest;
 
-        public SdcSharpClient(string token, IDiscordClientWrapper wrapper)
+        public SdcSharpClient(ISdcClientConfig config)
         {
-            Wrapper = wrapper;
+            Wrapper = config.Wrapper;
 
             HttpClient.DefaultRequestHeaders.Add("User-Agent", "Discord Bot");
-            HttpClient.DefaultRequestHeaders.Add("Authorization", token.StartsWith("SDC ") ? token : $"SDC {token}");
+            HttpClient.DefaultRequestHeaders.Add("Authorization", config.Token);
             HttpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
 
@@ -38,7 +39,7 @@ namespace SDC_Sharp
                 while (true)
                 {
                     if (LastRequest == new DateTime() || DateTime.UtcNow - LastRequest > timeout) break;
-                    await Task.Delay((TimeSpan) timeout - (DateTime.UtcNow - LastRequest));
+                    await Task.Delay((TimeSpan)timeout - (DateTime.UtcNow - LastRequest));
                 }
             });
         }

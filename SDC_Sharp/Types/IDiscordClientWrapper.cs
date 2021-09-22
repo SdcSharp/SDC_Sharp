@@ -1,4 +1,4 @@
-﻿namespace SDC_Sharp
+﻿namespace SDC_Sharp.SDC_Sharp.Types
 {
     public interface IDiscordClientWrapper
     {
