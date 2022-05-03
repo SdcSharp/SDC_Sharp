@@ -1,7 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>netcoreapp3.1</TargetFramework>
         <PackageId>SDC_Sharp</PackageId>
         <Title>SDC_Sharp</Title>
         <Authors>Satan1c</Authors>
@@ -14,6 +13,8 @@
         <AssemblyName>SDC_Sharp</AssemblyName>
         <PackageVersion>2.0.1</PackageVersion>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <LangVersion>8</LangVersion>
+        <TargetFramework>netcoreapp3.1</TargetFramework>
     </PropertyGroup>
 
     <ItemGroup>
