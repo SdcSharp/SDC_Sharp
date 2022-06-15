@@ -2,6 +2,6 @@ namespace SDC_Sharp.Types.Interfaces
 {
     public interface IGuildPlace
     {
-        public ulong Place { get; }
+        public ushort Place { get; }
     }
 }
