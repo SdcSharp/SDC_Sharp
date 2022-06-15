@@ -9,33 +9,37 @@ using SDC_Sharp.Types.Interfaces;
 
 namespace SDC_Sharp.Services
 {
-    public class BaseBotsService : BaseService
+    public class BaseBotsService
     {
-        public BaseBotsService(SdcSharpClient client) : base(client) { }
+        protected readonly SdcSharpClient Client;
 
-        public void AutoPostStats(TimeSpan interval, ulong botId, uint shards = 1, uint servers = 1)
+        public BaseBotsService(SdcSharpClient client)
         {
-            if (interval < Client.BotsRateLimit)
-                throw new ArgumentOutOfRangeException(
-                    nameof(interval),
-                    interval, 
-                    nameof(interval) + " value can not be less than" + Client.BotsRateLimit);
+            Client = client;
+        }
 
+        protected void AutoPostStats(TimeSpan interval, ulong botId, uint shards = 1, uint servers = 1,
+            bool logging = false)
+        {
             _ = Task.Run(async () =>
             {
                 while (true)
                 {
-                    await PostStats<BaseStatsResponse>(botId, shards, servers);
+                    var response = await PostStats<StatsResponse>(botId, shards, servers);
+                    if (logging)
+                        Console.WriteLine("{ status: " + response.Status + " }");
+
                     await Task.Delay(interval);
                 }
             });
         }
 
-        public async Task<T> PostStats<T>(ulong botId, uint shards = 1, uint servers = 1)
+        protected async Task<T> PostStats<T>(ulong botId, uint shards = 1, uint servers = 1)
             where T : IStatsResponse
         {
-            shards = shards < 1 ? 1 : shards;
-            servers = servers < 1 ? 1 : servers;
+            shards = shards == 0 ? 1 : shards;
+            servers = servers == 0 ? 1 : servers;
+
             return await Client.PostRequest<T>(
                 "/bots" + botId + "/stats",
                 new StringContent(

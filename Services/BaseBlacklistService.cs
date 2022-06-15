@@ -3,16 +3,16 @@ using SDC_Sharp.Types.Interfaces;
 
 namespace SDC_Sharp.Services
 {
-    public class BaseBlacklistService : BaseService
+    public abstract class BaseBlacklistService
     {
-        public BaseBlacklistService(SdcSharpClient client) : base(client) { }
+        protected readonly SdcSharpClient Client;
 
-        public async ValueTask<BaseUserWarns> GetWarns(ulong userId)
+        public BaseBlacklistService(SdcSharpClient client)
         {
-            return await GetWarns<BaseUserWarns>(userId);
+            Client = client;
         }
-        
-        public async ValueTask<T> GetWarns<T>(ulong userId) where T: IUserWarns
+
+        protected async Task<T> GetWarns<T>(ulong userId) where T : IUserWarns
         {
             return await Client.GetRequest<T>("warns/" + userId);
         }

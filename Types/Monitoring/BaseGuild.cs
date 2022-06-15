@@ -6,16 +6,18 @@ using SDC_Sharp.Types.Interfaces;
 
 namespace SDC_Sharp.Types.Monitoring
 {
-    public class BaseGuild : IGuild
+    public abstract class BaseGuild : IGuild
     {
-        private string _tagsString = "";
         private GuildTags[] _tags = Array.Empty<GuildTags>();
+        private string _tagsString = "";
+
+        [JsonIgnore] public IEnumerable<GuildTags> Tags => _tags;
 
         public string Name { get; set; }
         public string Avatar { get; set; }
         public string Invite { get; set; }
-        [JsonProperty("owner")]
-        public string OwnerTag { get; set; }
+
+        [JsonProperty("owner")] public string OwnerTag { get; set; }
 
         [JsonProperty("tags")]
         public string TagsString
@@ -24,31 +26,27 @@ namespace SDC_Sharp.Types.Monitoring
             set
             {
                 if (string.IsNullOrEmpty(value) || string.IsNullOrWhiteSpace(value)) return;
-                
+
                 _tagsString = value;
-                
+
                 var tagsArray = JsonConvert.SerializeObject(value.Split(","));
                 _tags = JsonConvert.DeserializeObject<GuildTags[]>(tagsArray);
             }
         }
 
-        [JsonIgnore]
-        public IEnumerable<GuildTags> Tags => _tags;
-        [JsonProperty("des")]
-        public string Description { get; set; }
-        
+        [JsonProperty("des")] public string Description { get; set; }
+
         public ulong Online { get; set; }
         public ulong Members { get; set; }
-        [JsonProperty("upCount")]
-        public ulong UpPoints { get; set; }
-        
-        [JsonProperty("bot")]
-        public bool IsBotOnServer { get; set; }
-        
-        [JsonProperty("status")]
-        public GuildBadges Badges { get; set; }
+
+        [JsonProperty("upCount")] public ulong UpPoints { get; set; }
+
+        [JsonProperty("bot")] public bool IsBotOnServer { get; set; }
+
+        [JsonProperty("status")] public GuildBadges Badges { get; set; }
+
         public GuildBoostLevel Boost { get; set; }
-        [JsonProperty("lang")]
-        public GuildLanguages Language { get; set; }
+
+        [JsonProperty("lang")] public GuildLanguages Language { get; set; }
     }
 }
