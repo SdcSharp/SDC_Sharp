@@ -4,7 +4,6 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
-using SDC_Sharp.Types;
 using SDC_Sharp.Types.Bots;
 using SDC_Sharp.Types.Interfaces;
 
@@ -43,14 +42,13 @@ namespace SDC_Sharp.Services
                     JsonConvert.SerializeObject(
                         new Dictionary<string, uint>
                         {
-                            { "shardsCount", shards },
-                            { "serversCount", servers }
+                            {"shardsCount", shards},
+                            {"serversCount", servers}
                         }
                     ),
                     Encoding.ASCII,
                     "application/json"
-                ),
-                Client.BotsRateLimit
+                )
             );
         }
     }

@@ -15,6 +15,6 @@ namespace SDC_Sharp.Types.Enums
         BotDev = 1 << 6,
         YouTube = 1 << 7,
         Twitch = 1 << 8,
-        SpamHunt = 1 << 9,
+        SpamHunt = 1 << 9
     }
 }

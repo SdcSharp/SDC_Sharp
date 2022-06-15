@@ -8,8 +8,7 @@ namespace SDC_Sharp.Types.Enums
     public enum GuildLanguages : byte
     {
         None = 0,
-        [EnumMember(Value = "al")]
-        All,
+        [EnumMember(Value = "al")] All,
         Ru,
         Ua,
         En

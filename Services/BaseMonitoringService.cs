@@ -1,12 +1,9 @@
 using System.Threading.Tasks;
-using SDC_Sharp.Types;
 using SDC_Sharp.Types.Interfaces;
-using SDC_Sharp.Types.Monitoring;
-using BaseRate = System.Collections.Generic.Dictionary<ulong, SDC_Sharp.Types.Enums.Rate>;
 
 namespace SDC_Sharp.Services
 {
-    public class BaseMonitoringService : BaseService
+    public class BaseMonitoringService
     {
         protected BaseMonitoringService(SdcSharpClient client) : base(client) { }
 

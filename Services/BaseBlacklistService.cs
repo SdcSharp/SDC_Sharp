@@ -1,6 +1,4 @@
 using System.Threading.Tasks;
-using SDC_Sharp.Types;
-using SDC_Sharp.Types.Blacklist;
 using SDC_Sharp.Types.Interfaces;
 
 namespace SDC_Sharp.Services
