@@ -20,19 +20,19 @@ namespace SDC_Sharp.Services
         }
 
         protected void AutoPostStats(TimeSpan interval, ulong botId, uint shards = 1, uint servers = 1,
-            bool logging = false)
+            bool logging = false, CancellationToken cancellationToken = default)
         {
             _ = Task.Run(async () =>
             {
-                while (true)
+                while (!cancellationToken.IsCancellationRequested)
                 {
                     var response = await PostStats<StatsResponse>(botId, shards, servers);
                     if (logging)
                         Console.WriteLine("{ status: " + response.Status + " }");
 
-                    await Task.Delay(interval);
+                    await Task.Delay(interval, cancellationToken);
                 }
-            });
+            }, cancellationToken);
         }
 
         protected async Task<T> PostStats<T>(ulong botId, uint shards = 1, uint servers = 1)
