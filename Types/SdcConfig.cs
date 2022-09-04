@@ -5,20 +5,20 @@ namespace SDC_Sharp.Types
 {
     public class SdcConfig
     {
-        private const string _tokenStartsWith = "SDC ";
-        private string _token = "";
+        private const string c_tokenStartsWith = "SDC ";
+        private string m_token = "";
 
         public string Token
         {
-            get => _token;
+            get => m_token;
             set
             {
-                value = value.StartsWith(_tokenStartsWith) ? value : _tokenStartsWith + value;
+                value = value.StartsWith(c_tokenStartsWith) ? value : c_tokenStartsWith + value;
 
-                if (value.Length <= _tokenStartsWith.Length + 1)
+                if (value.Length <= c_tokenStartsWith.Length + 1)
                     throw new NullReferenceException("Token can not be empty");
 
-                _token = value;
+                m_token = value;
             }
         }
     }

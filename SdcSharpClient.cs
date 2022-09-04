@@ -12,32 +12,32 @@ namespace SDC_Sharp
 {
     public sealed class SdcSharpClient
     {
-        private static HttpClient _httpClient = null!;
+        private static HttpClient m_httpClient = null!;
 
-        private static readonly TimeLimiter _botsRateLimit =
+        private static readonly TimeLimiter m_botsRateLimit =
             TimeLimiter.GetFromMaxCountByInterval(2, TimeSpan.FromMinutes(1));
 
-        private static readonly DelegatingHandler _handler =
+        private static readonly DelegatingHandler m_handler =
             TimeLimiter.GetFromMaxCountByInterval(5, TimeSpan.FromSeconds(10)).AsDelegatingHandler();
 
         public SdcSharpClient(SdcConfig config)
         {
-            _httpClient = new HttpClient(_handler);
-            _httpClient.BaseAddress = new Uri("https://api.server-discord.com/v2");
-            _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            m_httpClient = new HttpClient(m_handler);
+            m_httpClient.BaseAddress = new Uri("https://api.server-discord.com/v2");
+            m_httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-            _httpClient.DefaultRequestHeaders.Add("Authorization", config.Token);
+            m_httpClient.DefaultRequestHeaders.Add("Authorization", config.Token);
         }
 
         internal async Task<T> PostRequest<T>(string path, StringContent data)
         {
-            await _botsRateLimit;
-            return await Request<T>(_httpClient.PostAsync(path, data));
+            await m_botsRateLimit;
+            return await Request<T>(m_httpClient.PostAsync(path, data));
         }
 
         internal async Task<T> GetRequest<T>(string path)
         {
-            return await Request<T>(_httpClient.GetAsync(path));
+            return await Request<T>(m_httpClient.GetAsync(path));
         }
 
         private async Task<T> Request<T>(Task<HttpResponseMessage> task)

@@ -8,10 +8,10 @@ namespace SDC_Sharp.Types.Monitoring
 {
     public abstract class BaseGuild : IGuild
     {
-        private GuildTags[] _tags = Array.Empty<GuildTags>();
-        private string _tagsString = "";
+        private GuildTags[] m_tags = Array.Empty<GuildTags>();
+        private string m_tagsString = "";
 
-        [JsonIgnore] public IEnumerable<GuildTags> Tags => _tags;
+        [JsonIgnore] public IEnumerable<GuildTags> Tags => m_tags;
 
         public string Name { get; set; }
         public string Avatar { get; set; }
@@ -22,15 +22,15 @@ namespace SDC_Sharp.Types.Monitoring
         [JsonProperty("tags")]
         public string TagsString
         {
-            get => _tagsString;
+            get => m_tagsString;
             set
             {
                 if (string.IsNullOrEmpty(value) || string.IsNullOrWhiteSpace(value)) return;
 
-                _tagsString = value;
+                m_tagsString = value;
 
                 var tagsArray = JsonConvert.SerializeObject(value.Split(","));
-                _tags = JsonConvert.DeserializeObject<GuildTags[]>(tagsArray);
+                m_tags = JsonConvert.DeserializeObject<GuildTags[]>(tagsArray);
             }
         }
 
