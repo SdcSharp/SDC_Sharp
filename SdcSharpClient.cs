@@ -7,6 +7,7 @@ using ComposableAsync;
 using Newtonsoft.Json;
 using RateLimiter;
 using SDC_Sharp.Types;
+using SDC_Sharp.Types.Exceptions;
 
 namespace SDC_Sharp
 {
