@@ -35,26 +35,22 @@ namespace SDC_Sharp.Services
 			}, cancellationToken);
 		}
 
-		protected async Task<T> PostStats<T>(ulong botId, uint shards = 1, uint servers = 1)
-			where T : IStatsResponse
-		{
-			shards = shards == 0 ? 1 : shards;
-			servers = servers == 0 ? 1 : servers;
-
-			return await Client.PostRequest<T>(
-				"/bots" + botId + "/stats",
-				new StringContent(
-					JsonConvert.SerializeObject(
-						new Dictionary<string, uint>
-						{
-							{ "shardsCount", shards },
-							{ "serversCount", servers }
-						}
-					),
-					Encoding.ASCII,
-					"application/json"
-				)
-			);
-		}
+	protected Task<T> PostStats<T>(ulong botId, uint shards = 1, uint servers = 1)
+		where T : IStatsResponse
+	{
+		return Client.PostRequest<T>(
+			"/bots/" + botId + "/stats",
+			new StringContent(
+				JsonConvert.SerializeObject(
+					new Dictionary<string, uint>
+					{
+						{ "shardsCount", shards },
+						{ "serversCount", servers }
+					}
+				),
+				Encoding.ASCII,
+				"application/json"
+			)
+		);
 	}
 }
