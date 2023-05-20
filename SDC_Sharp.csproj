@@ -6,15 +6,14 @@
         <Authors>Satan1c</Authors>
         <Description>https://sdc.su/ API wrapper for C# .NET 3.1+</Description>
         <Copyright>Copyright (c) Alexander 2022</Copyright>
-        <PackageProjectUrl>https://github.com/SdcSharp/SDC_Sharp</PackageProjectUrl>
         <RepositoryUrl>https://github.com/SdcSharp/SDC_Sharp</RepositoryUrl>
         <RepositoryType>git</RepositoryType>
         <PackageTags>sdc discord</PackageTags>
         <AssemblyName>SDC_Sharp</AssemblyName>
         <PackageVersion>3.1.2</PackageVersion>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <LangVersion>8</LangVersion>
-        <TargetFramework>netcoreapp3.1</TargetFramework>
+        <LangVersion>10</LangVersion>
+        <TargetFrameworks>net7.0;net6.0;net6.0-windows;net7.0-windows</TargetFrameworks>
     </PropertyGroup>
 
     <ItemGroup>
