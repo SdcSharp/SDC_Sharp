@@ -1,7 +1,11 @@
-namespace SDC_Sharp.Types.Exceptions
+namespace SDC_Sharp.Types.Exceptions;
+
+internal sealed class ApiError
 {
-	internal sealed class ApiError
+	public readonly ApiErrorResponse Error;
+
+	public ApiError(ApiErrorResponse error)
 	{
-		public ApiErrorResponse Error;
+		Error = error;
 	}
 }
