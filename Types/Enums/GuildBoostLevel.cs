@@ -1,10 +1,9 @@
-namespace SDC_Sharp.Types.Enums
+namespace SDC_Sharp.Types.Enums;
+
+public enum GuildBoostLevel : byte
 {
-	public enum GuildBoostLevel : byte
-	{
-		None,
-		Light,
-		Pro,
-		Max
-	}
+	None,
+	Light,
+	Pro,
+	Max
 }

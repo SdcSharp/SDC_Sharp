@@ -2,15 +2,14 @@ using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
-namespace SDC_Sharp.Types.Enums
+namespace SDC_Sharp.Types.Enums;
+
+[JsonConverter(typeof(StringEnumConverter))]
+public enum GuildLanguages : byte
 {
-	[JsonConverter(typeof(StringEnumConverter))]
-	public enum GuildLanguages : byte
-	{
-		None = 0,
-		[EnumMember(Value = "al")] All,
-		Ru,
-		Ua,
-		En
-	}
+	None = 0,
+	[EnumMember(Value = "al")] All,
+	Ru,
+	Ua,
+	En
 }

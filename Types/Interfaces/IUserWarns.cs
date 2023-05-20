@@ -1,9 +1,8 @@
-namespace SDC_Sharp.Types.Interfaces
+namespace SDC_Sharp.Types.Interfaces;
+
+public interface IUserWarns
 {
-	public interface IUserWarns
-	{
-		public ulong Id { get; }
-		public string Type { get; }
-		public sbyte Warns { get; }
-	}
+	public ulong Id { get; }
+	public string Type { get; }
+	public sbyte Warns { get; }
 }

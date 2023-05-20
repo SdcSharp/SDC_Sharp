@@ -1,7 +1,6 @@
-namespace SDC_Sharp.Types.Interfaces
+namespace SDC_Sharp.Types.Interfaces;
+
+public interface IStatsResponse
 {
-	public interface IStatsResponse
-	{
-		public string Status { get; }
-	}
+	public string Status { get; }
 }

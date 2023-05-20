@@ -1,7 +1,6 @@
-namespace SDC_Sharp.Types.Interfaces
+namespace SDC_Sharp.Types.Interfaces;
+
+public interface IGuildPlace
 {
-	public interface IGuildPlace
-	{
-		public ushort Place { get; }
-	}
+	public ushort Place { get; }
 }
