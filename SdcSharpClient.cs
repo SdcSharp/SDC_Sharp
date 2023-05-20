@@ -6,51 +6,50 @@ using System.Threading.Tasks;
 using ComposableAsync;
 using Newtonsoft.Json;
 using RateLimiter;
-using SDC_Sharp.Types;
 using SDC_Sharp.Types.Exceptions;
+using SDC_Sharp.Types.Interfaces;
 
-namespace SDC_Sharp
+namespace SDC_Sharp;
+
+public sealed class SdcSharpClient : ISdcSharpClient
 {
-	public sealed class SdcSharpClient
+	private static HttpClient s_httpClient = null!;
+
+	private static readonly TimeLimiter s_botsRateLimit =
+		TimeLimiter.GetFromMaxCountByInterval(2, TimeSpan.FromMinutes(1));
+
+	private static readonly DelegatingHandler s_handler =
+		TimeLimiter.GetFromMaxCountByInterval(5, TimeSpan.FromSeconds(10)).AsDelegatingHandler();
+
+	public SdcSharpClient(ISdcConfig config)
 	{
-		private static HttpClient m_httpClient = null!;
+		s_httpClient = new HttpClient(s_handler);
+		s_httpClient.BaseAddress = new Uri("https://api.server-discord.com/v2");
+		s_httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-		private static readonly TimeLimiter m_botsRateLimit =
-			TimeLimiter.GetFromMaxCountByInterval(2, TimeSpan.FromMinutes(1));
+		s_httpClient.DefaultRequestHeaders.Add("Authorization", config.Token);
+	}
 
-		private static readonly DelegatingHandler m_handler =
-			TimeLimiter.GetFromMaxCountByInterval(5, TimeSpan.FromSeconds(10)).AsDelegatingHandler();
+	public async Task<T> PostRequest<T>(string path, StringContent data)
+	{
+		await s_botsRateLimit;
+		return await Request<T>(s_httpClient.PostAsync(path, data));
+	}
 
-		public SdcSharpClient(SdcConfig config)
-		{
-			m_httpClient = new HttpClient(m_handler);
-			m_httpClient.BaseAddress = new Uri("https://api.server-discord.com/v2");
-			m_httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+	public async Task<T> GetRequest<T>(string path)
+	{
+		return await Request<T>(s_httpClient.GetAsync(path));
+	}
 
-			m_httpClient.DefaultRequestHeaders.Add("Authorization", config.Token);
-		}
+	private static async Task<T> Request<T>(Task<HttpResponseMessage> task)
+	{
+		var response = await task;
+		response.EnsureSuccessStatusCode();
+		var str = await response.Content.ReadAsStringAsync();
 
-		internal async Task<T> PostRequest<T>(string path, StringContent data)
-		{
-			await m_botsRateLimit;
-			return await Request<T>(m_httpClient.PostAsync(path, data));
-		}
+		if (str.StartsWith(@"{""error"":{"))
+			throw ApiErrorException.GetException(JsonConvert.DeserializeObject<ApiError>(str)!.Error);
 
-		internal async Task<T> GetRequest<T>(string path)
-		{
-			return await Request<T>(m_httpClient.GetAsync(path));
-		}
-
-		private async Task<T> Request<T>(Task<HttpResponseMessage> task)
-		{
-			var response = await task;
-			response.EnsureSuccessStatusCode();
-			var str = await response.Content.ReadAsStringAsync();
-
-			if (str.StartsWith(@"{""error"":{"))
-				throw ApiErrorException.GetException(JsonConvert.DeserializeObject<ApiError>(str)!.Error);
-
-			return JsonConvert.DeserializeObject<T>(str)!;
-		}
+		return JsonConvert.DeserializeObject<T>(str)!;
 	}
 }
