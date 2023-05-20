@@ -17,23 +17,23 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Newtonsoft.Json" Version="13.0.1"/>
-        <PackageReference Include="RateLimiter" Version="2.2.0"/>
+        <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+        <PackageReference Include="RateLimiter" Version="2.2.0" />
     </ItemGroup>
 
     <ItemGroup>
-        <Compile Remove="SDC_Sharp.DSharpPlus\**"/>
-        <Compile Remove="SDC_Sharp.DiscordNet\**"/>
+        <Compile Remove="SDC_Sharp.DSharpPlus\**" />
+        <Compile Remove="SDC_Sharp.DiscordNet\**" />
     </ItemGroup>
 
     <ItemGroup>
-        <EmbeddedResource Remove="SDC_Sharp.DSharpPlus\**"/>
-        <EmbeddedResource Remove="SDC_Sharp.DiscordNet\**"/>
+        <EmbeddedResource Remove="SDC_Sharp.DSharpPlus\**" />
+        <EmbeddedResource Remove="SDC_Sharp.DiscordNet\**" />
     </ItemGroup>
 
     <ItemGroup>
-        <None Remove="SDC_Sharp.DSharpPlus\**"/>
-        <None Remove="SDC_Sharp.DiscordNet\**"/>
+        <None Remove="SDC_Sharp.DSharpPlus\**" />
+        <None Remove="SDC_Sharp.DiscordNet\**" />
     </ItemGroup>
 
 </Project>
