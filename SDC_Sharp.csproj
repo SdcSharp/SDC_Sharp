@@ -10,7 +10,7 @@
         <RepositoryType>git</RepositoryType>
         <PackageTags>sdc discord</PackageTags>
         <AssemblyName>SDC_Sharp</AssemblyName>
-        <PackageVersion>3.1.2</PackageVersion>
+        <PackageVersion>3.2.0</PackageVersion>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <LangVersion>10</LangVersion>
         <TargetFrameworks>net7.0;net6.0;net6.0-windows;net7.0-windows</TargetFrameworks>
