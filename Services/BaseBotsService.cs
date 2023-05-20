@@ -8,32 +8,36 @@ using Newtonsoft.Json;
 using SDC_Sharp.Types.Bots;
 using SDC_Sharp.Types.Interfaces;
 
-namespace SDC_Sharp.Services
+namespace SDC_Sharp.Services;
+
+public abstract class BaseBotsService
 {
-	public class BaseBotsService
+	protected readonly ISdcSharpClient Client;
+
+	public BaseBotsService(ISdcSharpClient client)
 	{
-		protected readonly SdcSharpClient Client;
+		Client = client;
+	}
 
-		public BaseBotsService(SdcSharpClient client)
+	protected void AutoPostStats(TimeSpan interval,
+		ulong botId,
+		uint shards = 1,
+		uint servers = 1,
+		bool logging = false,
+		CancellationToken cancellationToken = default)
+	{
+		_ = Task.Run(async () =>
 		{
-			Client = client;
-		}
-
-		protected void AutoPostStats(TimeSpan interval, ulong botId, uint shards = 1, uint servers = 1,
-			bool logging = false, CancellationToken cancellationToken = default)
-		{
-			_ = Task.Run(async () =>
+			while (!cancellationToken.IsCancellationRequested)
 			{
-				while (!cancellationToken.IsCancellationRequested)
-				{
-					var response = await PostStats<StatsResponse>(botId, shards, servers);
-					if (logging)
-						Console.WriteLine("{ status: " + response.Status + " }");
+				var response = await PostStats<StatsResponse>(botId, shards, servers);
+				if (logging)
+					Console.WriteLine("{ status: " + response.Status + " }");
 
-					await Task.Delay(interval, cancellationToken);
-				}
-			}, cancellationToken);
-		}
+				await Task.Delay(interval, cancellationToken);
+			}
+		}, cancellationToken);
+	}
 
 	protected Task<T> PostStats<T>(ulong botId, uint shards = 1, uint servers = 1)
 		where T : IStatsResponse
