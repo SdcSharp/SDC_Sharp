@@ -5,7 +5,6 @@
         <Title>SDC_Sharp</Title>
         <Authors>Satan1c</Authors>
         <Description>https://sdc.su/ API wrapper for C# .NET 3.1+</Description>
-        <Copyright>Copyright (c) Alexander 2022</Copyright>
         <RepositoryUrl>https://github.com/SdcSharp/SDC_Sharp</RepositoryUrl>
         <RepositoryType>git</RepositoryType>
         <PackageTags>sdc discord</PackageTags>
